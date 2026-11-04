@@ -1,0 +1,23 @@
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# donnees telechargees
+*.tle
+
+# java / maven
+client/target/
+
+# ide
+.idea/
+.vscode/
+*.iml
+
+# systeme
+.DS_Store
+Thumbs.db
+
+# secrets
+.env
