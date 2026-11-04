@@ -2,13 +2,19 @@ from skyfield.api import load, wgs84
 
 URL_STATIONS = "https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle"
 
+AGE_MAX_JOURS = 1
+
+NOM_FICHIER = "stations.tle"
 
 def charger_satellites():
-    liste_satellites = load.tle_file(URL_STATIONS, filename="stations.tle")
+    if not load.exists(NOM_FICHIER) or load.days_old(NOM_FICHIER) > AGE_MAX_JOURS:
+        load.download(URL_STATIONS, filename=NOM_FICHIER)
+
+    liste_satellites = load.tle_file(NOM_FICHIER)
     satellites = {}
     for satellite in liste_satellites:
         satellites[satellite.name] = satellite
-        
+
     return satellites
 
 def afficher_position(satellite):
