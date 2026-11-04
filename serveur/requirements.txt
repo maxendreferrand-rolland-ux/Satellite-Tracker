@@ -1,2 +1,6 @@
+﻿certifi==2026.10.23
+jplephem==2.24
 numpy==2.5.4
 opencv-python==5.0.0.93
+sgp4==2.27
+skyfield==1.55
