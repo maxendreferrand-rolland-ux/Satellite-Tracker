@@ -13,12 +13,15 @@ Le projet est découpé en deux parties :
 - Téléchargement des données orbitales (TLE) des stations spatiales depuis [CelesTrak](https://celestrak.org)
 - Calcul de la position actuelle d'un satellite : latitude, longitude et altitude
 - Affichage de la position de l'ISS et de la station spatiale chinoise Tiangong
+- Mise en cache des données orbitales : le fichier n'est retéléchargé que s'il a plus d'un jour
 
 ## Comment ça marche ?
 
 Un **TLE** (*Two-Line Element*) est un format qui décrit l'orbite d'un satellite en deux lignes de données (inclinaison, excentricité, nombre de révolutions par jour…). CelesTrak publie gratuitement ces données, mises à jour régulièrement.
 
 À partir d'un TLE, la librairie [Skyfield](https://rhodesmill.org/skyfield/) utilise le modèle de propagation **SGP4** pour calculer la position du satellite à n'importe quel instant, puis la convertit en coordonnées géographiques.
+
+Les TLE perdent en précision avec le temps (frottement atmosphérique, manœuvres de correction d'orbite), mais CelesTrak limite les téléchargements trop fréquents. Le programme utilise donc un cache : les données sont stockées localement et ne sont retéléchargées que lorsqu'elles ont plus d'un jour.
 
 ## Technologies
 
@@ -93,7 +96,8 @@ Altitude : 385.65 km
 ## Feuille de route
 
 - [x] Récupération des TLE et calcul de la position des stations spatiales
-- [ ] Mise en cache des données et tests unitaires (pytest)
+- [x] Mise en cache des données 
+- [ ]tests unitaires (pytest)
 - [ ] Prédiction des passages visibles au-dessus d'un lieu donné
 - [ ] API REST avec FastAPI
 - [ ] Client JavaFX : liste des satellites
