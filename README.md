@@ -97,7 +97,7 @@ Altitude : 385.65 km
 
 - [x] Récupération des TLE et calcul de la position des stations spatiales
 - [x] Mise en cache des données 
-- [ ]tests unitaires (pytest)
+- [ ] Tests unitaires (pytest)
 - [ ] Prédiction des passages visibles au-dessus d'un lieu donné
 - [ ] API REST avec FastAPI
 - [ ] Client JavaFX : liste des satellites
