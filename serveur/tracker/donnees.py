@@ -1,4 +1,5 @@
-from skyfield.api import load, wgs84
+from skyfield.api import load
+from tracker.calculs import calculer_position
 
 URL_STATIONS = "https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle"
 
@@ -18,19 +19,15 @@ def charger_satellites():
     return satellites
 
 def afficher_position(satellite):
+    maintenant = load.timescale().now()
+    latitude, longitude, altitude = calculer_position(satellite, maintenant)
 
-    echelle_temps = load.timescale()
-    maintenant = echelle_temps.now()
+    print("\n" + satellite.name)
+    print("Latitude :", round(latitude, 2))
+    print("Longitude :", round(longitude, 2))
+    print("Altitude :", round(altitude, 2), "km")
 
-    position = satellite.at(maintenant)
 
-    latitude, longitude = wgs84.latlon_of(position)
-    altitude = wgs84.height_of(position)
-    print("\n"+satellite.name)
-    print("Latitude :", round( latitude.degrees, 2))
-    print("Longitude :", round( longitude.degrees, 2))
-    print("Altitude :", round( altitude.km, 2), "km")
-    
 
 if __name__ == "__main__":
     satellites = charger_satellites()
@@ -39,9 +36,3 @@ if __name__ == "__main__":
     liste = [iss, tian]
     for satellite in liste : 
         afficher_position(satellite)
-
-        
-    
-        
-        
-       
