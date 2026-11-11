@@ -37,7 +37,7 @@ satellite-tracker/
 ├── serveur/
 │   ├── tracker/
 │   │   ├── donnees.py      # récupération des TLE et affichage des positions
-│   │   ├── calculs.py
+│   │   ├── calculs.py      # calcul de la position d'un satellite
 │   │   └── api.py
 │   ├── tests/
 │   └── requirements.txt
