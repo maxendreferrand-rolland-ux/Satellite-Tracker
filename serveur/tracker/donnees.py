@@ -1,11 +1,14 @@
 from skyfield.api import load
-from tracker.calculs import calculer_position
+from tracker.calculs import calculer_position, trouver_evenements
 
 URL_STATIONS = "https://celestrak.org/NORAD/elements/gp.php?GROUP=stations&FORMAT=tle"
 
 AGE_MAX_JOURS = 1
 
 NOM_FICHIER = "stations.tle"
+
+maintenant = load.timescale().now()
+
 
 def charger_satellites():
     if not load.exists(NOM_FICHIER) or load.days_old(NOM_FICHIER) > AGE_MAX_JOURS:
@@ -36,3 +39,8 @@ if __name__ == "__main__":
     liste = [iss, tian]
     for satellite in liste : 
         afficher_position(satellite)
+    print("\nPassages de l'ISS au-dessus de Rodez (24 h) :")
+    instants, evenements = trouver_evenements(iss, maintenant, maintenant + 1)
+    NOMS_EVENEMENTS = ["lever", "culmination", "coucher"]
+    for instant, evenement in zip(instants, evenements):
+        print(instant.utc_strftime("%d/%m %H:%M"), NOMS_EVENEMENTS[evenement])
