@@ -93,11 +93,21 @@ Longitude : 159.71
 Altitude : 385.65 km
 ```
 
+## Tests
+
+Depuis le dossier `serveur/`, avec l'environnement virtuel activé :
+
+```bash
+python -m pytest
+```
+
+Les tests vérifient notamment la cohérence physique des positions calculées : par exemple, la latitude de l'ISS ne peut pas dépasser l'inclinaison de son orbite (≈ 51,6°).
+
 ## Feuille de route
 
 - [x] Récupération des TLE et calcul de la position des stations spatiales
 - [x] Mise en cache des données 
-- [ ] Tests unitaires (pytest)
+- [x] Tests unitaires (pytest)
 - [ ] Prédiction des passages visibles au-dessus d'un lieu donné
 - [ ] API REST avec FastAPI
 - [ ] Client JavaFX : liste des satellites
